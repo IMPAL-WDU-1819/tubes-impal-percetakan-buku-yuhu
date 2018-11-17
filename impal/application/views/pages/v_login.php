@@ -1,4 +1,6 @@
-
+<script>   
+    $('#notifications').slideDown('slow').delay(3000).slideUp('slow');
+</script>
 	<div class="container-fluid">
 	  <!-- Content here -->
 	  <div class="row">
@@ -49,7 +51,7 @@
 					  <select class="custom-select" name="pilihan" id="inputGroupSelect01" required>
 					    <option value="">Pilih</option>
 					    <option value="Staff">Staff</option>
-					    <option value="Distibutor">Distributor</option>
+					    <option value="Distributor">Distributor</option>
 					    <option value="Pimpinan">Pimpinan</option>
 					    <option value="Supplier">Supplier</option>
 					  </select>
@@ -81,6 +83,8 @@
 		    </div>
 		  </div>
 		</div>
+		<div id="notifications"><?php echo $this->session->flashdata('message'); ?></div> 
+		<br>
 	</form>
 	<style type="text/css">
 		#img_login{
@@ -106,5 +110,16 @@
 		.tombol{
 			margin-left: 20px;
 			width: 90%;
+		}
+		#notifications {
+		    cursor: pointer;
+		    position: fixed;
+		    right: 0px;
+		    z-index: 9999;
+		    bottom: 0px;
+		    margin-bottom: 22px;
+		    margin-right: 15px;
+		    min-width: 300px; 
+		    max-width: 800px;  
 		}
 	</style>

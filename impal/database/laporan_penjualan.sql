@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 17, 2018 at 02:01 PM
+-- Generation Time: Nov 17, 2018 at 02:00 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -25,14 +25,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengguna`
+-- Table structure for table `laporan_penjualan`
 --
 
-CREATE TABLE `pengguna` (
-  `nama` varchar(20) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `jabatan` varchar(20) NOT NULL
+CREATE TABLE `laporan_penjualan` (
+  `nama_pengirim` varchar(20) NOT NULL,
+  `nama_buku` varchar(20) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,10 +40,10 @@ CREATE TABLE `pengguna` (
 --
 
 --
--- Indexes for table `pengguna`
+-- Indexes for table `laporan_penjualan`
 --
-ALTER TABLE `pengguna`
-  ADD PRIMARY KEY (`username`);
+ALTER TABLE `laporan_penjualan`
+  ADD PRIMARY KEY (`nama_pengirim`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

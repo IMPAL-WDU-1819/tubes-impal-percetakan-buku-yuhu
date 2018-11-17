@@ -37,12 +37,65 @@ class Login extends CI_Controller {
 		$password= $this->input->post('password');
 
 		$hasil = $this->m_login->is_user_login_ok($username, $password);
-		if($hasil['ada']>0){
-			echo "Login Berhasil";
-		} else {
-			echo "Login Gagal";
+		if($hasil->num_rows()>0)
+		{
+			$data=$hasil->row_array();
+			$this->session->set_userdata('masuk',TRUE);
+			if($data['jabatan']=='Staff'){
+				$this->session->set_userdata('sess_name',$data['nama']);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+                    <h4>Login Berhasil</h4>
+                    <p>Selamat datang</p>
+                </div>');
+				// Input your code here
+			}
+			elseif($data['jabatan']=='Distributor'){
+				$this->session->set_userdata('sess_name',$data['nama']);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+                    <h4>Login Berhasil</h4>
+                    <p>Selamat datang</p>
+                </div>');
+				redirect('pages/home_distributor');
+			}
+			elseif($data['jabatan']=='Supplier'){
+				$this->session->set_userdata('sess_name',$data['nama']);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+                    <h4>Login Berhasil</h4>
+                    <p>Selamat datang</p>
+                </div>');
+				// Input your code here
+			}
+			else{
+				$this->session->set_userdata('sess_name',$data['nama']);
+				$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+                    <h4>Login Berhasil</h4>
+                    <p>Selamat datang</p>
+                </div>');
+				// Input your code here
+			}
 		}
-	
+		else{
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					    <span aria-hidden="true">&times;</span>
+					</button>
+                    <h4>Login Gagal</h4>
+                    <p>Silahkan periksa username dan password</p>
+                </div>');
+			redirect(base_url());
+		}
 	}
 	public function action_register(){
 		$user = array(
@@ -54,4 +107,10 @@ class Login extends CI_Controller {
 		$this->m_login->register_acc($user);
 		redirect('login/index');
 	}
+
+	public function logout(){
+        $this->session->sess_destroy();
+        $url=base_url('');
+        redirect($url);
+    }
 }
